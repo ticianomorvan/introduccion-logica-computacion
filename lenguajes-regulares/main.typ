@@ -1,4 +1,4 @@
-#import "lib/notes.typ": notes
+#import "../lib/notes.typ": notes
 
 #show: notes.with(title: [Lenguajes Regulares])
 

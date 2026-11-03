@@ -1,4 +1,4 @@
-#import "../lib/notes.typ": *
+#import "../../lib/notes.typ": *
 
 = Gramáticas regulares <ch-regular-grammars>
 
@@ -244,13 +244,13 @@ Los autómatas finitos y las gramáticas regulares son computacionalmente equiva
         B &-> b B | C | ϵ \
         C &-> c C | ϵ, $
   con $L(G) = a^* b^* c^*$. Su AFN$ϵ$ equivalente $M$ es
-  #fig("regular-grammars/enfa-grpu-abc.png", 170pt)
+  #image("../img/regular-grammars/enfa-grpu-abc.png", width: 170pt)
   y claramente $L(M) = a^* b^* c^*$.
 ] <ex-grpu-to-enfa>
 
 #example[
   Sea $M$ el siguiente AF, con $L(M) = (a + b)^* b$:
-  #fig("regular-grammars/dfa-ends-in-b.png", 155pt)
+  #image("../img/regular-grammars/dfa-ends-in-b.png", width: 155pt)
   Su GRPU equivalente $G$, con variable inicial $q_0$, es
   $ G : q_0 &-> a q_0 | b q_1 \
         q_1 &-> b q_1 | a q_0 | ϵ, $

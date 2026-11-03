@@ -1,4 +1,4 @@
-#import "../lib/notes.typ": *
+#import "../../lib/notes.typ": *
 
 = Autómatas finitos <ch-finite-automata>
 
@@ -8,7 +8,7 @@ Un *autómata finito* (AF) es un modelo computacional basado en la noción de m�
 
 Un AF computa un lenguaje, en el sentido de que decide la pertenencia de cadenas a un cierto lenguaje: toma como entrada una cadena y, luego de procesar todos sus símbolos, decide si la cadena es *aceptada* o *rechazada*.
 
-#fig("finite-automata/fa-black-box.png", 280pt)
+#image("../img/finite-automata/fa-black-box.png", width: 280pt)
 
 Estudiaremos tres tipos de autómatas finitos, todos computacionalmente equivalentes entre sí:
 - determinísticos (AFD),
@@ -24,7 +24,7 @@ Además, cuenta con una *cinta de entrada*, en cuyas celdas se alojan los símbo
 #example[
   Procesamiento de la cadena “$a a b a b$”:
 
-  #fig("finite-automata/trace-aabab.png", 245pt)
+  #image("../img/finite-automata/trace-aabab.png", width: 245pt)
 
   El cómputo arranca en el estado inicial $q_0$. El cabezal lee sucesivamente los símbolos $a, a, b, a, b$, y la máquina transiciona a los estados $q_0, q_0, q_1, q_1, q_2$. Si $q_2$ es de aceptación, la cadena es aceptada; si no, es rechazada.
 ]
@@ -65,17 +65,17 @@ Además, cuenta con una *cinta de entrada*, en cuyas celdas se alojan los símbo
 
   La cadena $alpha_1 = a a b a b$ es aceptada por $M_1$, pues el autómata arriba al estado $q_2 in F$ luego de procesar todos sus símbolos:
 
-  #fig("finite-automata/dfa-m1-trace-aabab.png", 260pt)
+  #image("../img/finite-automata/dfa-m1-trace-aabab.png", width: 260pt)
 
   En cambio, la cadena $alpha_2 = a a b a b a$ es rechazada, pues el autómata arriba al estado $q_1 in.not F$:
 
-  #fig("finite-automata/dfa-m1-trace-aababa.png", 285pt)
+  #image("../img/finite-automata/dfa-m1-trace-aababa.png", width: 285pt)
 ] <ex-dfa-m1>
 
 #notation(title: "Diagrama de transición")[
   Representamos un AF mediante un sistema de transición etiquetado, es decir, un grafo cuyos nodos son los estados del AF; el estado inicial se marca con una flecha pequeña a su lado, los estados de aceptación con un doble círculo, y hay una arista de $q$ a $q'$ etiquetada con $a$ siempre que $delta(q, a) = q'$. El diagrama de transición del autómata $M_1$ del @ex-dfa-m1 es:
 
-  #fig("finite-automata/dfa-m1-diagram.png", 160pt)
+  #image("../img/finite-automata/dfa-m1-diagram.png", width: 160pt)
 ]
 
 #definition(title: "Lenguaje aceptado")[
@@ -89,9 +89,9 @@ Además, cuenta con una *cinta de entrada*, en cuyas celdas se alojan los símbo
 
 #example[
   Para el AFD $M_1$
-  #fig("finite-automata/dfa-example-m1.png", 200pt)
+  #image("../img/finite-automata/dfa-example-m1.png", width: 200pt)
   tenemos $L(M_1) = b^* a b^* a b^*$, el lenguaje de las cadenas que tienen exactamente dos símbolos $a$. Para el AFD $M_2$
-  #fig("finite-automata/dfa-example-m2.png", 150pt)
+  #image("../img/finite-automata/dfa-example-m2.png", width: 150pt)
   tenemos $L(M_2) = (a + b)^* b$, el lenguaje de las cadenas que terminan con el símbolo $b$.
 ]
 
@@ -113,15 +113,15 @@ Para evitar confusiones, denotaremos con $Delta$ las funciones de transición no
 #example[
   Sea $M_1$ el siguiente AFN:
 
-  #fig("finite-automata/nfa-m1.png", 170pt)
+  #image("../img/finite-automata/nfa-m1.png", width: 170pt)
 
   La cadena $a b b$ tiene una traza de procesamiento de aceptación:
 
-  #fig("finite-automata/nfa-m1-trace-accept.png", 170pt)
+  #image("../img/finite-automata/nfa-m1-trace-accept.png", width: 170pt)
 
   y también una traza de procesamiento de rechazo:
 
-  #fig("finite-automata/nfa-m1-trace-reject.png", 170pt)
+  #image("../img/finite-automata/nfa-m1-trace-reject.png", width: 170pt)
 ]
 
 #definition(title: "Lenguaje aceptado")[
@@ -160,7 +160,7 @@ Para evitar confusiones, denotaremos con $Delta$ las funciones de transición no
 #example(title: "Determinización")[
   Consideremos el siguiente AFN, cuyo lenguaje aceptado es $a(a^* + b^*)$:
 
-  #fig("finite-automata/nfa-determinization.png", 140pt)
+  #image("../img/finite-automata/nfa-determinization.png", width: 140pt)
 
   Definimos la función de transición del AFD mediante una tabla, partiendo del estado inicial ${q_0}$; de esta manera solo generamos los estados alcanzables desde ${q_0}$:
 
@@ -175,7 +175,7 @@ Para evitar confusiones, denotaremos con $Delta$ las funciones de transición no
 
   Obtenemos así el AFD
 
-  #fig("finite-automata/dfa-determinization-result.png", 245pt)
+  #image("../img/finite-automata/dfa-determinization-result.png", width: 245pt)
 
   cuyo lenguaje aceptado es $a(a^* + b^*)$, por lo que es equivalente al primero.
 ] <ex-determinization>
@@ -196,7 +196,7 @@ significa que el autómata puede transicionar libremente de $q$ a cualquier $q_i
 #example[
   El siguiente AFN$ϵ$ acepta el lenguaje $a^* b^* c^*$:
 
-  #fig("finite-automata/enfa-abc.png", 175pt)
+  #image("../img/finite-automata/enfa-abc.png", width: 175pt)
 ] <ex-enfa-abc>
 
 Las transiciones espontáneas permiten combinar o empalmar autómatas con mucha facilidad; es decir, diseñar autómatas por composición de sub-autómatas.
@@ -212,7 +212,7 @@ Las transiciones espontáneas permiten combinar o empalmar autómatas con mucha 
 
   Uniéndolos mediante transiciones espontáneas obtenemos un AFN$ϵ$ que acepta las cadenas con un número par de $a$'s o de $b$'s:
 
-  #fig("finite-automata/enfa-even-a-or-b.png", 150pt)
+  #image("../img/finite-automata/enfa-even-a-or-b.png", width: 150pt)
 ]
 
 #definition(title: "Clausura")[
@@ -246,7 +246,7 @@ Las transiciones espontáneas permiten combinar o empalmar autómatas con mucha 
 #example(title: "Eliminación de transiciones espontáneas")[
   Sea $M$ el AFN$ϵ$ del @ex-enfa-abc, con $L(M) = a^* b^* c^*$:
 
-  #fig("finite-automata/enfa-abc.png", 175pt)
+  #image("../img/finite-automata/enfa-abc.png", width: 175pt)
 
   Calculamos las clausuras de los estados,
   $ [q_0] = {q_0, q_1, q_2}, quad [q_1] = {q_1, q_2}, quad [q_2] = {q_2}, $
@@ -264,7 +264,7 @@ Las transiciones espontáneas permiten combinar o empalmar autómatas con mucha 
 
   Obtenemos así el AFN equivalente $M'$, con $L(M') = a^* b^* c^*$:
 
-  #fig("finite-automata/nfa-abc-no-eps.png", 245pt)
+  #image("../img/finite-automata/nfa-abc-no-eps.png", width: 245pt)
 ] <ex-epsilon-elimination>
 
 == Resumen

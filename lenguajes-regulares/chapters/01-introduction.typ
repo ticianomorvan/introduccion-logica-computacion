@@ -1,4 +1,4 @@
-#import "../lib/notes.typ": *
+#import "../../lib/notes.typ": *
 
 = Introducción <ch-introduction>
 
@@ -16,7 +16,7 @@ La jerarquía de Chomsky postula cuatro clases de lenguajes:
 
 y cada clase está contenida en la siguiente:
 
-#fig("introduction/chomsky-hierarchy.png", 195pt)
+#image("../img/introduction/chomsky-hierarchy.png", width: 195pt)
 
 == Modelos computacionales
 

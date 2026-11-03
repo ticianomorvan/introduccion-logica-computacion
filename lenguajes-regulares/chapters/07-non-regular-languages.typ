@@ -1,4 +1,4 @@
-#import "../lib/notes.typ": *
+#import "../../lib/notes.typ": *
 
 = Lenguajes no regulares <ch-non-regular-languages>
 
@@ -32,11 +32,11 @@ La propiedad dice que toda cadena suficientemente larga de un lenguaje regular t
 #proof[
   Si $L in "LR"^Sigma$, entonces, por el teorema de Kleene (@thm-kleene) y la equivalencia entre los tipos de autómatas (@thm-dfa-nfa y @thm-nfa-enfa), existe un AFD $M = (Sigma, Q, q_0, F, delta)$ tal que $L(M) = L$; sea $n = |Q|$. Sea $alpha in L$ con $|alpha| >= n$. Al procesar la cadena $alpha$ existe al menos un estado $q in Q$ que es visitado dos veces (es decir, se repite), pues al procesar sus $|alpha| >= n$ símbolos $M$ recorre al menos $n + 1$ estados (contando $q_0$), y $Q$ tiene solo $n$. Por lo tanto, $alpha$ se puede descomponer de la siguiente manera:
 
-  #fig("non-regular-languages/pumping-decomposition-tape.png", 340pt)
+  #image("../img/non-regular-languages/pumping-decomposition-tape.png", width: 340pt)
 
   donde $alpha_1$ lleva a $M$ de $q_0$ a $q$, $alpha_2$ lo lleva de $q$ nuevamente a $q$, y $alpha_3$ lo lleva de $q$ a un estado $p in F$. Luego, la subcadena $alpha_2$ puede ser repetida (bombeada) una cantidad cualquiera de veces y, aun así, el procesamiento de la cadena bombeada arribará al estado $p in F$:
 
-  #fig("non-regular-languages/pumping-loop-diagram.png", 185pt)
+  #image("../img/non-regular-languages/pumping-loop-diagram.png", width: 185pt)
 
   Por lo tanto, la cadena bombeada pertenece al lenguaje $L$:
   $ alpha_1 alpha_2^i alpha_3 in L quad "para todo" i >= 0. $

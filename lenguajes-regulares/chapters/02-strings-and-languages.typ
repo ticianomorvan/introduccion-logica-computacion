@@ -1,4 +1,4 @@
-#import "../lib/notes.typ": *
+#import "../../lib/notes.typ": *
 
 = Alfabetos, cadenas y lenguajes <ch-strings-and-languages>
 

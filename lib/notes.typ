@@ -1,7 +1,10 @@
-// Shared template and helpers. The only file that defines styling.
-// main.typ applies `notes`; every chapter imports the helpers with
-// `#import "../lib/notes.typ": *` (included files don't inherit main.typ's scope).
-// Paths are relative so the book builds from any project root (local, typst.app, a parent repo).
+// Shared template and helpers for every unit. The only file that defines styling.
+// A unit's main.typ applies `notes`; each chapter imports the helpers with
+// `#import "../../lib/notes.typ": *` (included files don't inherit main.typ's scope).
+
+// Natural-deduction trees, re-exported so every unit writes them the same way:
+// #prooftree(rule(name: $and I$, $phi$, $psi$, $phi and psi$))  (premises first, conclusion last)
+#import "@preview/curryst:0.6.0": rule, prooftree
 
 // ---------------------------------------------------------------------------
 // Environments: Definición, Teorema, Ejemplo, ...
@@ -26,6 +29,7 @@
 #let notation = env("Notación")
 #let remark = env("Observación")
 #let example = env("Ejemplo")
+#let exercise = env("Ejercicio")
 #let algorithm = env("Algoritmo")
 #let theorem = env("Teorema", italic: true)
 #let lemma = env("Lema", italic: true)
@@ -34,15 +38,26 @@
 
 #let proof(body) = block(width: 100%, breakable: true)[_Demostración._ #body #h(1fr) $square$]
 
-// ---------------------------------------------------------------------------
-// Figures and notation
-// ---------------------------------------------------------------------------
-
-// Centered raster image; `path` is relative to img/ (e.g. "finite-automata/nfa-m1.png").
-#let fig(path, width) = align(center, block(above: 1em, below: 1em, image("../img/" + path, width: width)))
-
 // Labeled arrow, e.g. $q #xarrow($a$) q'$.
 #let xarrow(label) = $limits(arrow.r)^#label$
+
+// Semantics of a formula under an assignment: $#sem($phi$, $f$)$ → ⟦φ⟧_f (omit the assignment for ⟦φ⟧).
+#let sem(formula, assignment) = $lr(⟦ #formula ⟧)_#assignment$
+
+// Metavariable □ for a binary connective, spaced as a binary operator: $(phi boxop psi)$.
+#let boxop = $class("binary", square)$
+
+// Schematic derivation: an optional hypothesis, a vertical ellipsis (named on its left) and the
+// conclusion. Usable as a premise: rule(name: $-> I$, deriv($psi$, hyp: $[phi]$), $phi -> psi$).
+#let deriv(concl, name: none, hyp: none) = {
+  let d = math.display
+  let rows = if name == none {
+    (if hyp != none { (d(hyp),) }, (d($dots.v$),), (d(concl),))
+  } else {
+    (if hyp != none { ([], d(hyp), []) }, (d(name), d($dots.v$), hide(d(name))), ([], d(concl), []))
+  }
+  math.equation(block: false, math.mat(delim: none, column-gap: 0.15em, row-gap: 0.3em, ..rows.filter(r => r != none)))
+}
 
 // ---------------------------------------------------------------------------
 // Document template
@@ -62,6 +77,8 @@
   show heading.where(level: 1): set heading(supplement: [Capítulo])
   // Tables here are small; splitting one across pages only hurts.
   show table: set block(breakable: false)
+  // Figures are plain `image(...)` calls in chapters; this centers and spaces them.
+  show image: it => align(center, block(above: 1em, below: 1em, it))
   // Each chapter starts on a new page and restarts environment numbering.
   // `outlined: true` excludes the outline's own "Índice" heading.
   show heading.where(level: 1, outlined: true): it => {
@@ -71,15 +88,17 @@
     block(below: 1.2em, it)
   }
 
-  // Statements (italic bodies) are short and never split from their header;
-  // definitions, examples and the like may flow across pages.
-  show figure.where(kind: env-kind): it => block(
-    width: 100%, above: 1.3em, below: 1.3em, breakable: it.body.func() != emph,
-    align(start)[
-      #strong[#it.supplement #context it.counter.display(it.numbering)#if it.caption != none [ (#it.caption.body)].]
+  // An environment shorter than a third of the page never splits (so a header is
+  // never stranded from its body); longer ones, like long proofs or examples, flow.
+  show figure.where(kind: env-kind): it => context {
+    let content = align(start)[
+      #strong[#it.supplement #it.counter.display(it.numbering)#if it.caption != none [ (#it.caption.body)].]
       #it.body
-    ],
-  )
+    ]
+    let text-width = page.width - 2 * 2.5cm
+    let short = measure(content, width: text-width).height < (page.height - 2 * 2.5cm) / 3
+    block(width: 100%, above: 1.3em, below: 1.3em, breakable: not short, content)
+  }
 
   align(center, text(size: 22pt, title))
   v(1.5em)

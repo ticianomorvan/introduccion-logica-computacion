@@ -1,4 +1,4 @@
-#import "../lib/notes.typ": *
+#import "../../lib/notes.typ": *
 
 = Teorema de Kleene <ch-kleene-theorem>
 
@@ -22,15 +22,15 @@ Para probar el inciso (1), notemos que un AF puede verse como una estructura rec
 
   _Casos base._ Si $e = emptyset$, tomamos el autómata $M$
 
-  #fig("kleene-theorem/enfa-empty-set.png", 38pt)
+  #image("../img/kleene-theorem/enfa-empty-set.png", width: 38pt)
 
   y luego $L(M) = emptyset = L(emptyset)$. Si $e = ϵ$, tomamos
 
-  #fig("kleene-theorem/enfa-epsilon.png", 46pt)
+  #image("../img/kleene-theorem/enfa-epsilon.png", width: 46pt)
 
   y luego $L(M) = {ϵ} = L(ϵ)$. Si $e = a$, tomamos
 
-  #fig("kleene-theorem/enfa-symbol.png", 108pt)
+  #image("../img/kleene-theorem/enfa-symbol.png", width: 108pt)
 
   y luego $L(M) = {a} = L(a)$.
 
@@ -40,7 +40,7 @@ Para probar el inciso (1), notemos que un AF puede verse como una estructura rec
     Delta &= Delta_1 union Delta_2 union {((q_0, ϵ), {q_1, q_2})}, $
   es decir, un nuevo estado inicial $q_0$ con transiciones espontáneas hacia los estados iniciales de $M_1$ y $M_2$:
 
-  #fig("kleene-theorem/enfa-union.png", 185pt)
+  #image("../img/kleene-theorem/enfa-union.png", width: 185pt)
 
   Luego, $L(M) = L(M_1) union L(M_2) = L(e_1) union L(e_2) = L(e_1 + e_2) = L(e)$.
 
@@ -52,7 +52,7 @@ Para probar el inciso (1), notemos que un AF puede verse como una estructura rec
       &quad union {((q, ϵ), Delta_1(q, ϵ) union {q_2}) : q in F_1}, $
   es decir, agregamos una transición espontánea desde cada estado de aceptación de $M_1$ hacia el estado inicial de $M_2$:
 
-  #fig("kleene-theorem/enfa-concatenation.png", 305pt)
+  #image("../img/kleene-theorem/enfa-concatenation.png", width: 305pt)
 
   Luego, $L(M) = L(M_1) L(M_2) = L(e_1) L(e_2) = L(e_1 e_2) = L(e)$.
 
@@ -64,7 +64,7 @@ Para probar el inciso (1), notemos que un AF puede verse como una estructura rec
       &quad union {((q_0, ϵ), {q_1})}, $
   es decir, un nuevo estado inicial $q_0$, que también es de aceptación, con una transición espontánea hacia $q_1$, y transiciones espontáneas desde cada estado de aceptación de $M_1$ de vuelta hacia $q_0$:
 
-  #fig("kleene-theorem/enfa-star.png", 130pt)
+  #image("../img/kleene-theorem/enfa-star.png", width: 130pt)
 
   Luego, $L(M) = (L(M_1))^* = (L(e_1))^* = L(e_1^*) = L(e)$.
 ]
@@ -80,15 +80,15 @@ La demostración anterior nos brinda un algoritmo recursivo que, dada una expres
 #example[
   Construimos un AF que acepta la expresión regular $a b + b a$. Primero, un AF que acepta $a b$, concatenando los autómatas de $a$ y de $b$:
 
-  #fig("kleene-theorem/enfa-ab.png", 185pt)
+  #image("../img/kleene-theorem/enfa-ab.png", width: 185pt)
 
   Luego, un AF que acepta $b a$:
 
-  #fig("kleene-theorem/enfa-ba.png", 188pt)
+  #image("../img/kleene-theorem/enfa-ba.png", width: 188pt)
 
   Finalmente, un AF que acepta $a b + b a$, uniendo los dos anteriores:
 
-  #fig("kleene-theorem/enfa-ab-or-ba.png", 238pt)
+  #image("../img/kleene-theorem/enfa-ab-or-ba.png", width: 238pt)
 ] <ex-kleene-ab-or-ba>
 
 == De autómatas a expresiones regulares
@@ -132,7 +132,7 @@ Notemos que si $A$ y $B$ son regulares, entonces $X$ es regular, y $A$, $B$ y $X
 #example[
   Consideremos el siguiente AFN $M$:
 
-  #fig("kleene-theorem/nfa-arden-example.png", 155pt)
+  #image("../img/kleene-theorem/nfa-arden-example.png", width: 155pt)
 
   El sistema de ecuaciones que determina el autómata $M$ es:
   $ cases(

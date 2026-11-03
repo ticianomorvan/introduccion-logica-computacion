@@ -1,11 +1,15 @@
-# Allowlist: only what is listed here is published. Scratch (tmp/), tools (.tools/)
-# and other local material stay untracked. Add a line per new unit.
+# Allowlist: only what is listed here is published. Prácticos, apuntes, scratch
+# (tmp/), tools (.tools/) and other local material stay untracked. Add a line per new unit.
 /*
 !/.gitignore
 !/AGENTS.md
 !/README.md
+!/Makefile
+!/lib/
+!/estructuras-ordenadas/
+!/logica-proposicional/
 !/lenguajes-regulares/
 
-# Build output: rebuild from the .typ sources.
+# Build output: rebuild with `make`.
 *.pdf
 .DS_Store

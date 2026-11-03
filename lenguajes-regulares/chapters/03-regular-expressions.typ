@@ -1,4 +1,4 @@
-#import "../lib/notes.typ": *
+#import "../../lib/notes.typ": *
 
 = Lenguajes regulares y expresiones regulares <ch-regular-expressions>
 
