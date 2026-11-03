@@ -1,0 +1,11 @@
+# Allowlist: only what is listed here is published. Scratch (tmp/), tools (.tools/)
+# and other local material stay untracked. Add a line per new unit.
+/*
+!/.gitignore
+!/AGENTS.md
+!/README.md
+!/lenguajes-regulares/
+
+# Build output: rebuild from the .typ sources.
+*.pdf
+.DS_Store
