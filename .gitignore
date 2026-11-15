@@ -9,6 +9,7 @@
 !/estructuras-ordenadas/
 !/logica-proposicional/
 !/lenguajes-regulares/
+!/exams/
 
 # Build output: rebuild with `make`.
 *.pdf

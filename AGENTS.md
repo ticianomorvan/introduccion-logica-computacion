@@ -12,6 +12,6 @@ Cuando una consulta mencione el apunte, un práctico o una filmina, consultar pr
 
 ## Repositorio
 
-`README.md` tiene la estructura, los comandos de compilación y todas las convenciones de los libros (`lib/notes.typ` es la única plantilla; `lenguajes-regulares/chapters/04-finite-automata.typ` es el capítulo de referencia). Solo se publican las filminas transcriptas: los prácticos, los apuntes y el material local (`tmp/`, `output/`, `.tools/`) quedan fuera del repositorio.
+`README.md` tiene la estructura, los comandos de compilación y todas las convenciones de los libros (`lib/notes.typ` es la única plantilla; `lenguajes-regulares/chapters/04-finite-automata.typ` es el capítulo de referencia). Solo se publican las filminas transcriptas y los parciales con su resolución (`exams/`): los prácticos, los apuntes y el material local (`tmp/`, `output/`, `.tools/`) quedan fuera del repositorio.
 
-Antes de terminar un cambio: compilar la unidad afectada (`make <unidad>`), sin warnings, y revisar las páginas renderizadas que se tocaron.
+Antes de terminar un cambio: compilar la unidad afectada (`make <unidad>`) o los exámenes (`make exams`), sin warnings, y revisar las páginas renderizadas que se tocaron.
